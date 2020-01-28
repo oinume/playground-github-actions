@@ -20,6 +20,7 @@ jobs:
       run: |
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
         cat VERSION.txt
+        perl -v
     - name: Commit files
       run: |
         git commit -m "Update VERSION" -a
