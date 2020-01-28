@@ -1,6 +1,9 @@
 name: new-pull-request
 
-on: [push]
+on:
+  release:
+    types:
+      - created
 
 jobs:
   build:
