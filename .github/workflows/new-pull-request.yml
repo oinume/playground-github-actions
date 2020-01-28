@@ -18,7 +18,6 @@ jobs:
         git config --local user.name "actions"
     - name: Create local changes
       run: |
-#        echo $GITHUB_REF
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
 #    - name: Commit files
 #      run: |
