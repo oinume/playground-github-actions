@@ -19,12 +19,7 @@ jobs:
     - name: Create local changes
       run: |
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
-#    - name: Commit files
-#      run: |
-#        git commit -m "Update VERSION" -a
-#    - name: Run a one-line script
-#      run: echo Hello, world!
-#    - name: Run a multi-line script
-#      run: |
-#        echo Add other actions to build,
-#        echo test, and deploy your project.
+        cat VERSION.txt
+    - name: Commit files
+      run: |
+        git commit -m "Update VERSION" -a
