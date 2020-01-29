@@ -31,4 +31,4 @@ jobs:
     - uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ env.NEXT_VERSION) }}
+        branch: ${{ env.NEXT_VERSION }}
