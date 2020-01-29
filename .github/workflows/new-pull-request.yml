@@ -32,4 +32,4 @@ jobs:
         branch: release/${{ env.NEXT_VERSION }}
         base: master
         title: "Release ${{ env.NEXT_VERSION }}"
-        body: "##Pull-requests in this release\n- TBD"
+        body: "## Pull-requests in this release\n- TBD"
