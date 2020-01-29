@@ -23,7 +23,7 @@ jobs:
         NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /^(\d+)\.(\d+)\.(\d+)$/) { $v = $2; $v++; print "$1.$v.0\n" } else { print "Invalid tag format."; exit 1 }')
         echo "NEXT_VERSION = $NEXT_VERSION"
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
-    - name: Commit files
+    - name: Empty commit
       run: |
         git checkout master
         git commit --allow-empty -m "Empty commit for $NEXT_VERSION"
