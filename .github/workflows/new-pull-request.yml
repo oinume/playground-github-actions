@@ -20,8 +20,8 @@ jobs:
       run: |
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
         cat VERSION.txt
-        NEXT=$(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
-        echo "::set-env name=NEXT_VERSION::$(echo $NEXT)"
+        NEXT_VERSION=$(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
+        echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
     - name: Commit files
       run: |
         git commit -m "Update VERSION" -a
@@ -30,4 +30,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create a release branch
       run: |
-        echo "Next version is $NEXT"
+        echo "Next version is $NEXT_VERSION"
