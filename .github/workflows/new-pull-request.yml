@@ -28,6 +28,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: release/${{ env.NEXT_VERSION }}
+        base: master
         title: "Release ${{ env.NEXT_VERSION }}"
 #    - name: Create a release branch
 #      run: |
