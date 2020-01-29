@@ -9,30 +9,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Git config
       run: |
         git config --local user.email "oinume@gmail.com"
         git config --local user.name "actions"
     - name: Create local changes
       run: |
-        echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
-        cat VERSION.txt
-        NEXT_VERSION=$(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
+        CURRENT_VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+        NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
     - name: Commit files
       run: |
-        git commit -m "Update VERSION" -a
-    - name: Create a pull request with a new release branch
-      uses: peter-evans/create-pull-request@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: release/${{ env.NEXT_VERSION }}
-        title: "Release ${{ env.NEXT_VERSION }}"
-#    - name: Create a release branch
-#      run: |
-#        echo "Next version is $NEXT_VERSION"
-#    - uses: ad-m/github-push-action@master
+        git branch -b release/$NEXT_VERSION
+        git commit --allow-empty -m "Empty commit for $NEXT_VERSION"
+#    - name: Create a pull request with a new release branch
+#      uses: peter-evans/create-pull-request@v2
 #      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        token: ${{ secrets.GITHUB_TOKEN }}
 #        branch: release/${{ env.NEXT_VERSION }}
+#        title: "Release ${{ env.NEXT_VERSION }}"
+    - name: Create a release branch
+      run: |
+        echo "Next version is $NEXT_VERSION"
+    - uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: release/${{ env.NEXT_VERSION }}
