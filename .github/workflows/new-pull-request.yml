@@ -21,7 +21,7 @@ jobs:
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
     - name: Commit files
       run: |
-        git branch -b release/$NEXT_VERSION
+        git checkout -b release/$NEXT_VERSION
         git commit --allow-empty -m "Empty commit for $NEXT_VERSION"
 #    - name: Create a pull request with a new release branch
 #      uses: peter-evans/create-pull-request@v2
