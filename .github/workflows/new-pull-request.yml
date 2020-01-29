@@ -20,7 +20,7 @@ jobs:
       run: |
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
         cat VERSION.txt
-        NEXT=(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
+        NEXT=$(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT)
     - name: Commit files
       run: |
