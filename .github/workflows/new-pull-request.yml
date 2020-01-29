@@ -23,16 +23,16 @@ jobs:
       run: |
         git checkout -b release/$NEXT_VERSION
         git commit --allow-empty -m "Empty commit for $NEXT_VERSION"
-#    - name: Create a pull request with a new release branch
-#      uses: peter-evans/create-pull-request@v2
-#      with:
-#        token: ${{ secrets.GITHUB_TOKEN }}
-#        branch: release/${{ env.NEXT_VERSION }}
-#        title: "Release ${{ env.NEXT_VERSION }}"
-    - name: Create a release branch
-      run: |
-        echo "Next version is $NEXT_VERSION"
-    - uses: ad-m/github-push-action@master
+    - name: Create a pull request with a new release branch
+      uses: peter-evans/create-pull-request@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         branch: release/${{ env.NEXT_VERSION }}
+        title: "Release ${{ env.NEXT_VERSION }}"
+#    - name: Create a release branch
+#      run: |
+#        echo "Next version is $NEXT_VERSION"
+#    - uses: ad-m/github-push-action@master
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        branch: release/${{ env.NEXT_VERSION }}
