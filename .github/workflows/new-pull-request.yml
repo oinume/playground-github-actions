@@ -20,11 +20,14 @@ jobs:
       run: |
         echo $GITHUB_REF | sed 's/refs\/tags\///' > VERSION.txt
         cat VERSION.txt
-        perl -v
+        NEXT=(cat VERSION.txt | perl -ne 'if ($_ =~ /(.+)\.(.+)\.(.+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
+        echo "::set-env name=NEXT_VERSION::$(echo $NEXT)
     - name: Commit files
       run: |
         git commit -m "Update VERSION" -a
-    - name: Push changes
+    - name: Create a release branch
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Next version is $NEXT"
