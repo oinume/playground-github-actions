@@ -19,7 +19,7 @@ jobs:
     - name: Create local changes
       run: |
         CURRENT_VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-        NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /(\d+)\.(\d+)\.(\d+)/) { $v = $3; $v++; print "$1.$2.$v\n" }')
+        NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /(\d+)\.(\d+)\.(\d+)/) { $v = $3; $v++; print "$1.$2.$v\n" } else { print "Invalid tag format."; exit 1 }')
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
     - name: Commit files
       run: |
