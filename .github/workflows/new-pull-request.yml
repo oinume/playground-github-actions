@@ -42,5 +42,4 @@ jobs:
         base: master
         title: "Release ${{ env.NEXT_VERSION }}"
         body: |
-          ## Pull-requests in this release are associated with this milestone.
           https://github.com/${{ github.repository }}/milestone/${{ steps.create_milestone.outputs.number }}
