@@ -23,6 +23,13 @@ jobs:
         NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /^(\d+)\.(\d+)\.\d+$/) { $v = $2; $v++; print "$1.$v.0\n" } else { print "Invalid tag format."; exit 1 }')
         echo "NEXT_VERSION = $NEXT_VERSION"
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
+    - name: Create milestone
+      id: create_milestone
+      uses: WyriHaximus/github-action-create-milestone@0.1.0
+      with:
+        title: ${{ env.NEXT_VERSION }}
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - name: Empty commit
       run: |
         git checkout master
@@ -34,4 +41,6 @@ jobs:
         branch: release/${{ env.NEXT_VERSION }}
         base: master
         title: "Release ${{ env.NEXT_VERSION }}"
-        body: "## Pull-requests in this release\n- TBD"
+        body: |
+          ## Pull-requests in this release are associated with this milestone.
+          https://github.com/kouzoh/merpay-deferred-payment/milestone/${{ steps.create_milestone.outputs.number }}
