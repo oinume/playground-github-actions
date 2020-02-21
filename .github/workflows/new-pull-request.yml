@@ -54,11 +54,10 @@ jobs:
           {
             text: "release/${{ env.NEXT_VERSION }} was created",
             attachments: [{
-              "author_name": "actions", // json
-              fallback: 'fallback',
-              color: 'good',
-              title: 'release/${{ env.NEXT_VERSION }} was created',
-              text: 'https://github.com/${{ github.repository }}/pull/${{ steps.create_pull_request.outputs.pr_number }}',
+              "author_name": "actions",
+              "color": "good",
+              "title": "release/${{ env.NEXT_VERSION }} was created",
+              "text": "https://github.com/${{ github.repository }}/pull/${{ steps.create_pull_request.outputs.pr_number }}",
             }]
           }
       env:
