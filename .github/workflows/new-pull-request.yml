@@ -80,6 +80,7 @@ jobs:
       uses: 8398a7/action-slack@v2
       with:
         type: failure
+        status: ${{ job.status }}
         text: failed to create `release/${{ env.NEXT_VERSION }}` branch
       if: failure()
       env:
