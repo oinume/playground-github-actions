@@ -30,6 +30,10 @@ jobs:
         title: ${{ env.NEXT_VERSION }}
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    - name: Check milestone is created
+      if: ${{ steps.create_milestone.outputs.number }} == ""
+      run: |
+        exit 1
     - name: Empty commit
       run: |
         git checkout master
