@@ -49,7 +49,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: release/${{ env.NEXT_VERSION }}
         base: master
-        title: "Release ${{ env.NEXT_VERSION }} (${{ env.RELEASE_DATE }}"
+        title: "Release ${{ env.NEXT_VERSION }} (${{ env.RELEASE_DATE }})"
         body: |
           ## For developers
           Link this milestone to your pull-request after merge.
