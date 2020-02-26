@@ -60,19 +60,20 @@ jobs:
         status: custom
         payload: |
           {
-            text: "`release/${{ env.NEXT_VERSION }}` was created. This is a release branch for next release.",
-            attachments: [{
+            "text": "`release/${{ env.NEXT_VERSION }}` was created. This is a release branch for next release.",
+            "attachments": [{
               "color": "good",
+              "fallback": "`release/${{ env.NEXT_VERSION }}` was created. This is a release branch for next release.",
               "fields": [
                 {
-                  title: "Pull Request",
-                  value: "https://github.com/${{ github.repository }}/pull/${{ steps.create_pull_request.outputs.pr_number }}",
-                  short: false
+                  "title": "Pull Request",
+                  "value": "https://github.com/${{ github.repository }}/pull/${{ steps.create_pull_request.outputs.pr_number }}",
+                  "short": false
                 },
                 {
-                  title: "Milestone",
-                  value: "https://github.com/${{ github.repository }}/milestone/${{ steps.create_milestone.outputs.number }}",
-                  short: false
+                  "title": "Milestone",
+                  "value": "https://github.com/${{ github.repository }}/milestone/${{ steps.create_milestone.outputs.number }}",
+                  "short": false
                 }
               ]
             }]
@@ -83,9 +84,21 @@ jobs:
     - name: Post to slack when failure
       uses: 8398a7/action-slack@v2
       with:
-        type: failure
-        status: ${{ job.status }}
-        text: failed to create `release/${{ env.NEXT_VERSION }}` branch. Maybe the branch already exists.
+        status: custom
+        payload: |
+          {
+            "text": "Failed to create `release/${{ env.NEXT_VERSION }}` branch. Maybe the branch already exists.",
+            "attachments": [{
+              "color": "warning",
+              "fields": [
+                {
+                  "title": "Branch URL",
+                  "value": "https://github.com/${{ github.repository }}/tree/release/${{ env.NEXT_VERSION }}",
+                  "short": false
+                }
+              ]
+            }]
+          }
       if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
