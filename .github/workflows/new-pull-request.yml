@@ -36,7 +36,7 @@ jobs:
     - name: Check milestone is created
       if: steps.create_milestone.outputs.number == 'null'
       run: |
-        echo "Empty milestone number: ${{ steps.create_milestone.outputs.number }}"
+        echo "Milestone number is null"
         exit 1
     - name: Empty commit
       run: |
@@ -54,11 +54,6 @@ jobs:
           ## For developers
           Link this milestone to your pull-request after merge.
           https://github.com/${{ github.repository }}/milestone/${{ steps.create_milestone.outputs.number }}
-    - name: Check pull request is created
-      if: steps.create_pull_request.outputs.pr_number == ''
-      run: |
-        echo "Empty pull request number: ${{ steps.create_pull_request.outputs.pr_number }}"
-        exit 1
     - name: Post to slack
       uses: 8398a7/action-slack@v2
       with:
