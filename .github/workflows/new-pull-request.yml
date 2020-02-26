@@ -34,7 +34,7 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - name: Check milestone is created
-      if: steps.create_milestone.outputs.number == null
+      if: steps.create_milestone.outputs.number == 'null'
       run: |
         echo "Empty milestone number: ${{ steps.create_milestone.outputs.number }}"
         exit 1
