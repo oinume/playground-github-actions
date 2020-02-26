@@ -36,7 +36,7 @@ jobs:
     - name: Check milestone is created
       if: ${{ steps.create_milestone.outputs.number }} == ""
       run: |
-        echo "Empty milestone number"
+        echo "Empty milestone number: ${{ steps.create_milestone.outputs.number }}"
         exit 1
     - name: Empty commit
       run: |
