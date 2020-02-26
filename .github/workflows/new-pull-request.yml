@@ -23,6 +23,9 @@ jobs:
         NEXT_VERSION=$(echo $CURRENT_VERSION | perl -ne 'if ($_ =~ /^(\d+)\.(\d+)\.\d+$/) { $v = $2; $v++; print "$1.$v.0\n" } else { print "Invalid tag format."; exit 1 }')
         echo "NEXT_VERSION = $NEXT_VERSION"
         echo "::set-env name=NEXT_VERSION::$(echo $NEXT_VERSION)"
+    - name: Get release date
+      run: |
+        echo "::set-env name=RELEASE_DATE::$(echo 2020-02-29)"
     - name: Create milestone
       id: create_milestone
       uses: WyriHaximus/github-action-create-milestone@0.1.0
@@ -33,6 +36,7 @@ jobs:
     - name: Check milestone is created
       if: ${{ steps.create_milestone.outputs.number }} == ""
       run: |
+        echo "Empty milestone number"
         exit 1
     - name: Empty commit
       run: |
@@ -45,7 +49,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: release/${{ env.NEXT_VERSION }}
         base: master
-        title: "Release ${{ env.NEXT_VERSION }}"
+        title: "Release ${{ env.NEXT_VERSION }} (${{ env.RELEASE_DATE }}"
         body: |
           ## For developers
           Link this milestone to your pull-request after merge.
