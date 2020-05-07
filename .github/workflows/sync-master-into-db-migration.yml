@@ -26,3 +26,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_BRANCH: master
           TO_BRANCH: db-migration
+          PULL_REQUEST_BODY: |
+            New commit has just landed in master so let's sync it to db-migration.
