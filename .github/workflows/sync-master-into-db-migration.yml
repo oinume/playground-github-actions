@@ -19,13 +19,11 @@ jobs:
           git config --local user.name "oinume"
       - name: Git merge
         run: |
-          git remote -v
           git pull origin db-migration --allow-unrelated-histories
           git checkout db-migration
-          git branch -a
           git merge master
-#      - name: Push to db-migration branch
-#        uses: ad-m/github-push-action@v0.5.0
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: db-migration
+      - name: Push to db-migration branch
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: db-migration
