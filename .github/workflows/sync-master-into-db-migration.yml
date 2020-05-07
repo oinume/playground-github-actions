@@ -21,7 +21,6 @@ jobs:
         run: |
           git remote -v
           git pull --all
-#          git pull origin db-migration --allow-unrelated-histories
           git checkout db-migration
           git merge origin/master
       - name: Push to db-migration branch
