@@ -19,7 +19,8 @@ jobs:
           git config --local user.name "oinume"
       - name: Git merge
         run: |
-          git pull origin db-migration
+          git remote -v
+          git pull origin db-migration --allow-unrelated-histories
 #          git branch -a
 #          git checkout db-migration
 #          git branch -a
