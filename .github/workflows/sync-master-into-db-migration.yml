@@ -20,7 +20,7 @@ jobs:
       - name: Git merge
         run: |
           git pull origin db-migration
-          git branch -a
+#          git branch -a
 #          git checkout db-migration
 #          git branch -a
 #          git merge master
