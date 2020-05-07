@@ -19,7 +19,7 @@ jobs:
           git config --local user.name "oinume"
       - name: Git merge
         run: |
-          git fetch origin db-migration
+          git pull origin db-migration
           git checkout db-migration
           git merge master
       - name: Push to db-migration branch
