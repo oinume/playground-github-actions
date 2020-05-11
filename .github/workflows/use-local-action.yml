@@ -12,6 +12,8 @@ jobs:
       - name: Call hello world action
         id: hello_world
         uses: ./.github/actions/hello-world-action
+        with:
+          who-to-greet: "me"
       - name: Show result
         run: |
           echo ${{ steps.hello_world.outputs.time }}
