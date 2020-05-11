@@ -10,4 +10,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Call hello world action
+        id: hello_world
         uses: ./.github/actions/hello-world-action
+      - name: Show result
+        run: |
+          echo ${{ steps.hello_world.outputs.time }}
