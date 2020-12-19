@@ -1,4 +1,4 @@
-name: use-local-action
+name: on-push-master
 on:
   push:
     branches:
