@@ -1,0 +1,13 @@
+name: on-push-master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show branch name
+        run: |
+          BRANCH=$(basename ${{ github.ref }})
+          echo $BRANCH
