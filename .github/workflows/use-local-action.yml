@@ -1,14 +1,17 @@
 name: use-local-action
-
 on:
   push
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Echo dir
+        run: |
+          echo "github.workspace = ${{ github.workspace }}"
+          echo "HOME = $HOME"
+          echo "PWD = $PWD"
       - name: Call hello world action
         id: hello_world
         uses: ./.github/actions/hello-world-action
