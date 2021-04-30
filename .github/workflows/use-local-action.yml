@@ -7,13 +7,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          path: checkout
       - name: Echo dir
         run: |
           echo "github.workspace = ${{ github.workspace }}"
           echo "HOME = $HOME"
           echo "PWD = $PWD"
-          ls ${{ github.workspace }}/checkout
       - name: Call hello world action
         id: hello_world
         uses: ./.github/actions/hello-world-action
