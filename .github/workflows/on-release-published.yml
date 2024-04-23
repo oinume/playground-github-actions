@@ -3,10 +3,9 @@ on:
   release:
     types:
       - "published"
-    tags:
-      - "backend_v*"
 jobs:
   build:
+    if: startsWith(github.event.release.tag_name, 'backend_v')
     runs-on: ubuntu-latest
     steps:
       - name: Show GITHUB_REF
