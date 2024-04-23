@@ -1,0 +1,14 @@
+name: on-release-published
+on:
+  release:
+    types:
+      - "published"
+    tags:
+      - "backend_v*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show GITHUB_REF
+        run: |
+          echo $GITHUB_REF
