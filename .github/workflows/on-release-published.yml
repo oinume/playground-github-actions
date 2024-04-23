@@ -1,0 +1,13 @@
+name: on-release-published
+on:
+  release:
+    types:
+      - "published"
+jobs:
+  build:
+    if: startsWith(github.event.release.tag_name, 'backend_v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show GITHUB_REF
+        run: |
+          echo $GITHUB_REF
